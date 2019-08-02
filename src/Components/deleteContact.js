@@ -13,7 +13,7 @@ export default class Delete extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    axios.delete(`http://localhost:3000/api/contact/${this.state.id}`)
+    axios.delete(`http://localhost:8080/api/contact/${this.state.id}`)
       .then(res => {
         console.log(res);
         console.log(res.data);

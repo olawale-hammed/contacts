@@ -7,32 +7,26 @@ class Add extends React.Component{
         this.state = {
             first_name: '',
             last_name: '',
-            phone: ''
+            phone: '',
+            pin: ''
         }
     }
-    handleChange = (e) =>{
-        const input = e.target
-        this.setState({ first_name: input.value })
-    }
-    handleChange1 = (e) =>{
-        const input = e.target
-        this.setState({ last_name: input.value })
-    }
-    handleChange2 = (e) =>{
-        const input = e.target
-        this.setState({ phone: input.value })
-    }
+    handleChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value })
+      }
+
     handleSubmit = (e) =>{
         e.preventDefault()
         const contact = {
             first_name: this.state.first_name,
             last_name: this.state.last_name,
-            phone: this.state.phone
+            phone: this.state.phone,
+            pin: this.state.pin
         }
-        axios.post(`http://localhost:3000/api/contact`, contact).then(res => {
-            // console.log(res)
+        axios.post(`http://localhost:8080/api/contact`, contact).then(res => {
             console.log(res.data)
-        })
+        }).then(()=> this.setState({ first_name: '', last_name: '', phone: '', pin: ''}))
+        
     }
     render(){
         return (
@@ -40,15 +34,19 @@ class Add extends React.Component{
                 <form  onSubmit={this.handleSubmit}>
                     <label>
                         First_name: 
-                        <input type='text' name='first' onChange={this.handleChange} value={this.first_name} /><br /><br />
+                        <input type='text' name='first_name' onChange={this.handleChange} value={this.state.first_name} /><br /><br />
                     </label>
                     <label>
                         Last_name: 
-                        <input type='text' name='last' onChange={this.handleChange1} value={this.last_name} /><br /><br />
+                        <input type='text' name='last_name' onChange={this.handleChange} value={this.state.last_name} /><br /><br />
                     </label>
                     <label>
                         Phone_number: 
-                        <input type='text' name='number' onChange={this.handleChange2} value={this.phone} /><br />
+                        <input type='text' name='phone' onChange={this.handleChange} value={this.state.phone} /><br />
+                    </label>
+                    <label>
+                        Pin: 
+                        <input type='password' name='pin' onChange={this.handleChange} value={this.state.pin} /><br />
                     </label>
                         
                     <button type='submit'> Add </button>

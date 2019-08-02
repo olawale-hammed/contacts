@@ -8,7 +8,7 @@ export default class List extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3000/api/contacts`)
+    axios.get(`http://localhost:8080/api/contacts`)
       .then(res => {
         const contacts = res.data;
         this.setState({ contacts });

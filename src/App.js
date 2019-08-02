@@ -11,7 +11,7 @@ class App extends React.Component{
     return (
       <Router>
         <div>
-          <Add submit ={this.handleSubmit}/>
+          <Add/>
           <List />
           <Delete />
       </div>
